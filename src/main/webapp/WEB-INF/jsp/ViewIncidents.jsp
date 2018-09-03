@@ -11,7 +11,7 @@
 <body class="class-for-index">
     This is Incident...!
     <br>
-    <button onclick="location.href = 'CreateIncident';" id="button_create_incident">Create</button>
+    <button onclick="location.href = 'Incident';" id="button_create_incident">Create</button>
     <br>
     <br>
     <button onclick="location.href = 'DeleteIncident';" id="button_delete_incident">Delete</button>

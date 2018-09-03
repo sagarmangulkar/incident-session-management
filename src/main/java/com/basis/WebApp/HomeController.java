@@ -1,9 +1,15 @@
-package com.basis.WebApp.controller;
+package com.basis.WebApp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -28,10 +34,24 @@ public class HomeController {
         return "ViewSessions";
     }
 
-    @RequestMapping("/CreateIncident")
-    public String createIncident(Model model){
-        model.addAttribute("name", "Sagar in Create Incident");
-        return "CreateIncident";
+    @RequestMapping(value = "/Incident", method = RequestMethod.GET)
+    public ModelAndView Incident(){
+        return new ModelAndView("Incident",
+                "Incident",
+                new Incident());
+    }
+
+    @RequestMapping(value = "/CreateIncident", method = RequestMethod.POST)
+    public String createIncident(@Valid @ModelAttribute("Incident") Incident incident,
+                                 BindingResult result,
+                                 ModelMap model){
+        if (result.hasErrors()) {
+            return "error";
+        }
+        model.addAttribute("id", incident.getId());
+        model.addAttribute("name", incident.getName());
+        model.addAttribute("description", incident.getDescription());
+        return "Incident";
     }
 
     @RequestMapping("/DeleteIncident")

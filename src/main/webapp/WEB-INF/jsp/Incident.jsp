@@ -10,22 +10,40 @@
 <body class="class-for-index">
     This is Create Incident...!
     <br>
+    <script>
+        window.onload = function(){
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("description").value = "";
+        }
+    </script>
     <form:form method="POST" action="/CreateIncident" modelAttribute="Incident">
-        <form:label path="id">id</form:label>
-        <form:input path="id" />
-        <br>
-        <form:label path="name">name</form:label>
-        <form:input path="name" />
-        <br>
-        <form:label path="description">description</form:label>
-        <form:input path="description" />
-        <br>
-        <input type="submit" value="Submit">
-        <br>
-        <h2> ${id} <h2><br>
-        <h2> ${name} <h2><br>
-        <h2> ${description} <h2><br>
+        <table border="black">
+            <tr>
+                <td align="center"><form:label path="id">id</form:label></td>
+                <td align="center"><form:input path="id" /></td>
+            </tr>
+            <tr>
+                <td align="center"><form:label path="name">name</form:label></td>
+                <td align="center"><form:input path="name" /></td>
+            </tr>
+            <tr>
+                <td align="center"><form:label path="description">description</form:label></td>
+                <td align="center"><form:input path="description" /></td>
+            </tr>
+            <tr>
+                <td align="center" colspan="2"><input type="submit" value="Submit"></td>
+            </tr>
+        </table>
+        ${name} has been added successfully.
     </form:form>
+
+    <table>
+        <tr>
+            <td><button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">View Incidents</button></td>
+            <td><button onclick="location.href = 'ViewSessions';" id="button_view_sessions">View Sessions</button></td>
+        </tr>
+    </table>
     <br>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package com.basis.WebApp;
+package com.basis.WebApp.beans;
 
 import java.util.Date;
 
@@ -48,5 +48,15 @@ public class Incident {
 
     public void setCreationTime(Date creationTime) {
         this.creationTime = creationTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Incident{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creationTime=" + creationTime +
+                '}';
     }
 }

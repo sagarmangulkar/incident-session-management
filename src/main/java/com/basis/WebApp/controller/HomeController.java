@@ -1,5 +1,6 @@
-package com.basis.WebApp;
+package com.basis.WebApp.controller;
 
+import com.basis.WebApp.beans.Incident;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -10,9 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.LinkedHashMap;
 
 @Controller
 public class HomeController {
+
+    private LinkedHashMap<Integer, Incident> incidents = new LinkedHashMap<>();
 
     @ModelAttribute
     @RequestMapping("/index")
@@ -22,9 +26,9 @@ public class HomeController {
     }
 
     @ModelAttribute
-    @RequestMapping("/ViewIncidents")
+    @RequestMapping(value = "/ViewIncidents", method = RequestMethod.GET)
     public String incident(Model model) {
-        model.addAttribute("name", "Sagar");
+        model.addAttribute("incidents", incidents);
         return "ViewIncidents";
     }
 
@@ -48,6 +52,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
+        incidents.put(incident.getId(), incident);
         model.addAttribute("id", incident.getId());
         model.addAttribute("name", incident.getName());
         model.addAttribute("description", incident.getDescription());

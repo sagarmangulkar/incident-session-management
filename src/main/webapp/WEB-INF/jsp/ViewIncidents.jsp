@@ -7,16 +7,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
     <title>Incident</title>
+    <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
 </head>
 <body class="class-for-index">
+
     <br>
     <button onclick="location.href = 'Incident';" id="button_create_incident">Create</button>
     <br>
     <br>
-    <form:form method="POST" action="/DeleteIncident" modelAttribute="IncidentsToBeDeleted">
-        <input type="submit" value="Delete">
+    <form:form method="POST" action="/DeleteIncident" modelAttribute="IncidentsToBeDeleted" id="incidentForm">
+        <input type="submit" value="Delete" id="submit">
         <br>
         <h3>Incidents</h3><br>
         <table border="black">
@@ -28,8 +30,7 @@
             </tr>
             <c:forEach items="${incidents}" var="incident">
                 <tr>
-                    <%--<td><form:checkbox path="idsToBeDeleted[${status.index}].checkControl"/></td>--%>
-                    <td><form:checkbox path="idsToBeDeleted" value="${incident.getKey()}"/></td>
+                    <td><form:checkbox path="idsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/></td>
                     <td><c:out value="${incident.getKey()}"/></td>
                     <td><c:out value="${incident.getValue().getName()}"/></td>
                     <td><c:out value="${incident.getValue().getDescription()}"/></td>
@@ -37,6 +38,22 @@
             </c:forEach>
         </table>
     </form:form>
-    <h2>${deleteSize}</h2>
+    <h2>${successMessage}</h2>
+
+
+    <script>
+        window.onload = function(){
+            document.getElementById('submit').disabled=true;
+        }
+
+        function enableDeleteButton(tokenCheckBox) {
+          if (tokenCheckBox.checked == true) {
+            document.getElementById('submit').disabled=false;
+          } else {
+            document.getElementById('submit').disabled=true;
+          }
+        }
+    </script>
+
 </body>
 </html>

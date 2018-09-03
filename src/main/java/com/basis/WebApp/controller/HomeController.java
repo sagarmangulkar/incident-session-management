@@ -56,23 +56,21 @@ public class HomeController {
             return "error";
         }
         incidents.put(incident.getId(), incident);
-        model.addAttribute("id", incident.getId());
-        model.addAttribute("name", incident.getName());
-        model.addAttribute("description", incident.getDescription());
+        model.addAttribute("successMessage", incident.getName() + " has been created.");
         return "Incident";
     }
 
     @RequestMapping(value = "/DeleteIncident", method = RequestMethod.POST)
     public String deleteIncident(@Valid @ModelAttribute("IncidentsToBeDeleted") IncidentsToBeDeleted incidentsToBeDeleted,
                                  BindingResult result,
-                                 ModelMap model){
+                                 Model model){
         if (result.hasErrors()) {
             return "error";
         }
         for (int id : incidentsToBeDeleted.getIdsToBeDeleted()) {
             incidents.remove(id);
         }
-        model.addAttribute("deleteSize", incidentsToBeDeleted.getIdsToBeDeleted().length);
+        model.addAttribute("successMessage", incidentsToBeDeleted.getIdsToBeDeleted().length + " number of Incidents have been Deleted.");
         return "redirect:/ViewIncidents";
     }
 

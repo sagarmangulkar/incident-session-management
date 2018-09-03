@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="UTF-8">
-    <link href="styles.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 	<title>Incident and Session Management</title>
 </head>
 

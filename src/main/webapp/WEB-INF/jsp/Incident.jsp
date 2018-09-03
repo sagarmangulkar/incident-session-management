@@ -40,8 +40,8 @@
 
     <table>
         <tr>
-            <td><button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">View Incidents</button></td>
-            <td><button onclick="location.href = 'ViewSessions';" id="button_view_sessions">View Sessions</button></td>
+            <td><button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">Incidents</button></td>
+            <td><button onclick="location.href = 'ViewSessions';" id="button_view_sessions">Sessions</button></td>
         </tr>
     </table>
     <br>

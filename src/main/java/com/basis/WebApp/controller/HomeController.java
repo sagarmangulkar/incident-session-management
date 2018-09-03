@@ -1,6 +1,7 @@
 package com.basis.WebApp.controller;
 
 import com.basis.WebApp.beans.Incident;
+import com.basis.WebApp.beans.IncidentsToBeDeleted;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -27,9 +28,11 @@ public class HomeController {
 
     @ModelAttribute
     @RequestMapping(value = "/ViewIncidents", method = RequestMethod.GET)
-    public String incident(Model model) {
+    public ModelAndView viewIncidents(Model model) {
         model.addAttribute("incidents", incidents);
-        return "ViewIncidents";
+        return new ModelAndView("ViewIncidents",
+                "IncidentsToBeDeleted",
+                new IncidentsToBeDeleted());
     }
 
     @RequestMapping("/ViewSessions")
@@ -59,9 +62,18 @@ public class HomeController {
         return "Incident";
     }
 
-    @RequestMapping("/DeleteIncident")
-    public String deleteIncident(){
-        return "DeleteIncident";
+    @RequestMapping(value = "/DeleteIncident", method = RequestMethod.POST)
+    public String deleteIncident(@Valid @ModelAttribute("IncidentsToBeDeleted") IncidentsToBeDeleted incidentsToBeDeleted,
+                                 BindingResult result,
+                                 ModelMap model){
+        if (result.hasErrors()) {
+            return "error";
+        }
+        for (int id : incidentsToBeDeleted.getIdsToBeDeleted()) {
+            incidents.remove(id);
+        }
+        model.addAttribute("deleteSize", incidentsToBeDeleted.getIdsToBeDeleted().length);
+        return "redirect:/ViewIncidents";
     }
 
     @RequestMapping("/CreateSession")

@@ -7,5 +7,6 @@
 </head>
 <body class="class-for-index">
     Incident has been deleted successfully.
+    <h2>${id}</h2>
 </body>
 </html>

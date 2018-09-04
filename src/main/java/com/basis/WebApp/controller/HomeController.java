@@ -2,6 +2,7 @@ package com.basis.WebApp.controller;
 
 import com.basis.WebApp.beans.Incident;
 import com.basis.WebApp.beans.IncidentsToBeDeleted;
+import com.basis.WebApp.beans.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,7 @@ import java.util.LinkedHashMap;
 public class HomeController {
 
     private LinkedHashMap<Integer, Incident> incidents = new LinkedHashMap<>();
+    private LinkedHashMap<Integer, Session> sessions = new LinkedHashMap<>();
 
     @ModelAttribute
     @RequestMapping("/index")
@@ -37,7 +39,8 @@ public class HomeController {
 
     @RequestMapping("/ViewSessions")
     public String session(Model model) {
-        model.addAttribute("name", "Sagar");
+        //model.addAttribute("name", "Sagar");
+        model.addAttribute("sessions", sessions);
         return "ViewSessions";
     }
 
@@ -74,13 +77,48 @@ public class HomeController {
         return "redirect:/ViewIncidents";
     }
 
-    @RequestMapping("/CreateSession")
-    public String createSession(){
-        return "CreateSession";
+    @RequestMapping(value = "/Session", method = RequestMethod.GET)
+    public ModelAndView session(){
+        return new ModelAndView("Session",
+                "Session",
+                new Session());
     }
 
-    @RequestMapping("/UpdateSession")
-    public String updateSession(){
+    @RequestMapping(value = "/CreateSession", method = RequestMethod.POST)
+    public String createSession(@Valid @ModelAttribute("Session") Session session,
+                                 BindingResult result,
+                                 ModelMap model){
+        if (result.hasErrors()) {
+            return "error";
+        }
+        sessions.put(session.getId(), session);
+        model.addAttribute("successMessage",
+                session.getName() + " has been created. ");
+        return "Session";
+    }
+
+    @RequestMapping("/SessionToUpdated")
+    public String SessionToUpdated(@Valid @ModelAttribute("Session") Session session,
+                                   BindingResult result,
+                                   ModelMap model, int id){
+        if (result.hasErrors()) {
+            return "error";
+        }
+        model.addAttribute("session", sessions.get(id));
         return "UpdateSession";
+    }
+
+    @RequestMapping(value = "/UpdateSession", method = RequestMethod.POST)
+    public String updateSession(@Valid @ModelAttribute("Session") Session session,
+                                BindingResult result,
+                                ModelMap model){
+        if (result.hasErrors()) {
+            return "error";
+        }
+        sessions.put(session.getId(), session);
+        model.addAttribute("successMessage",
+                session.getName() + " has been updated. ");
+        //return "UpdateSession";
+        return "redirect:/ViewSessions";
     }
 }

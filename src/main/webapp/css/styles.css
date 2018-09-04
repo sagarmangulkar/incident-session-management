@@ -50,7 +50,7 @@ input[type=submit]:hover {
 }
 
 div {
-    width: 22%;
+    width: 30%;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 10px;
@@ -58,4 +58,16 @@ div {
 
 .hidden {
     display: none;
+}
+
+.custom-select {
+    width: 100%;
+    position: relative;
+    font-family: Arial;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }

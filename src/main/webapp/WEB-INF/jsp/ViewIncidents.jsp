@@ -23,17 +23,32 @@
         <h3>Incidents</h3><br>
         <table border="black">
             <tr>
-                <td></td>
-                <td>ID</td>
-                <td>Name</td>
-                <td>Description</td>
+                <td>
+                </td>
+                <td>
+                    ID
+                </td>
+                <td>
+                    Name
+                </td>
+                <td>
+                    Description
+                </td>
             </tr>
             <c:forEach items="${incidents}" var="incident">
                 <tr>
-                    <td><form:checkbox path="idsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/></td>
-                    <td><c:out value="${incident.getKey()}"/></td>
-                    <td><c:out value="${incident.getValue().getName()}"/></td>
-                    <td><c:out value="${incident.getValue().getDescription()}"/></td>
+                    <td>
+                        <form:checkbox path="idsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/>
+                    </td>
+                    <td>
+                        <c:out value="${incident.getKey()}"/>
+                    </td>
+                    <td>
+                        <c:out value="${incident.getValue().getName()}"/>
+                    </td>
+                    <td>
+                        <c:out value="${incident.getValue().getDescription()}"/>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

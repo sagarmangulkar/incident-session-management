@@ -27,30 +27,30 @@
         <div>
         <table border="black">
             <tr>
-                <td>
+                <td align="center">
                 </td>
-                <td>
+                <td align="center">
                     Name
                 </td>
-                <td>
+                <td align="center">
                     Description
                 </td>
-                <td>
+                <td align="center">
                     Creation Time
                 </td>
             </tr>
             <c:forEach items="${incidents}" var="incident">
                 <tr>
-                    <td>
+                    <td align="center">
                         <form:checkbox path="incidentsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/>
                     </td>
-                    <td>
+                    <td align="center">
                         <c:out value="${incident.getValue().getName()}"/>
                     </td>
-                    <td>
+                    <td align="center">
                         <c:out value="${incident.getValue().getDescription()}"/>
                     </td>
-                    <td>
+                    <td align="center">
                         <c:out value="${incident.getValue().getCreationTime()}"/>
                     </td>
                 </tr>

@@ -18,31 +18,40 @@
         <form:form method="POST" action="/UpdateSession" modelAttribute="Session">
         <table border="black">
             <tr>
-                <td>
+                <td align="center">
                     Session Name
                 </td>
-                <td>
+                <td align="center">
                     Associated Incident
                 </td>
-                <td>
+                <td align="center">
+                    Creation Time
+                </td>
+                <td align="center">
                     Status
                 </td>
-                <td>
+                <td align="center">
                     Malware Scan Status
                 </td>
             </tr>
                 <tr>
-                    <td>
+                    <td align="center">
                         <form:label path="name">
                             ${session.getName()}
                         </form:label>
                         <form:input path="name" type="hidden" value="${session.getName()}"/>
                     </td>
-                    <td>
+                    <td align="center">
                         <form:label path="associatedIncidentName">
                             ${session.getAssociatedIncidentName()}
                         </form:label>
                         <form:input path="associatedIncidentName" type="hidden" value="${session.getAssociatedIncidentName()}"/>
+                    </td>
+                    <td align="center">
+                        <form:label path="createTime">
+                            ${session.getCreateTime()}
+                        </form:label>
+                        <form:input path="createTime" type="hidden" value="${session.getCreateTime()}"/>
                     </td>
                     <td align="center">
                         <form:select path="status" class="custom-select" value="${session.getStatus()}">

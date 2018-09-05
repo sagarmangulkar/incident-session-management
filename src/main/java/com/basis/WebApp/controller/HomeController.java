@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -59,6 +60,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
+        incident.setCreationTime(new Date(System.currentTimeMillis()));
         incidents.put(incident.getName(), incident);
         model.addAttribute("successMessage", incident.getName() + " has been created.");
         return "Incident";
@@ -103,6 +105,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
+        session.setCreateTime(new Date(System.currentTimeMillis()));
         sessions.put(session.getName(), session);
         model.addAttribute("successMessage",
                 session.getName() + " has been created. ");

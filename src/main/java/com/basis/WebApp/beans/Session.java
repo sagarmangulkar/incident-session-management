@@ -3,6 +3,7 @@ package com.basis.WebApp.beans;
 import java.util.Date;
 
 enum Status {In_Progress, Completed}
+
 public class Session {
     private String name;
     private Status status;

@@ -37,6 +37,9 @@
                 <td>
                     Associated Incident
                 </td>
+                <td>
+                    Create Time
+                </td>
             </tr>
             <c:forEach items="${sessions}" var="session">
                 <tr>
@@ -53,6 +56,9 @@
                     </td>
                     <td>
                         <c:out value="${session.getValue().getAssociatedIncidentName()}"/>
+                    </td>
+                    <td>
+                        <c:out value="${session.getValue().getCreateTime()}"/>
                     </td>
                 </tr>
             </c:forEach>

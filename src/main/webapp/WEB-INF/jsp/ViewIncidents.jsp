@@ -35,6 +35,9 @@
                 <td>
                     Description
                 </td>
+                <td>
+                    Creation Time
+                </td>
             </tr>
             <c:forEach items="${incidents}" var="incident">
                 <tr>
@@ -46,6 +49,9 @@
                     </td>
                     <td>
                         <c:out value="${incident.getValue().getDescription()}"/>
+                    </td>
+                    <td>
+                        <c:out value="${incident.getValue().getCreationTime()}"/>
                     </td>
                 </tr>
             </c:forEach>

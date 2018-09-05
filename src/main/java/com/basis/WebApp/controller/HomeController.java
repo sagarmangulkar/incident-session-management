@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Controller
 public class HomeController {
@@ -71,9 +73,19 @@ public class HomeController {
         }
         for (String incidentsNames : incidentsToBeDeleted.getIncidentsToBeDeleted()) {
             incidents.remove(incidentsNames);
+            deleteAssociatedSessions(incidentsNames);
         }
         model.addAttribute("successMessage", incidentsToBeDeleted.getIncidentsToBeDeleted().length + " number of Incidents have been Deleted.");
         return "redirect:/ViewIncidents";
+    }
+
+    private void deleteAssociatedSessions(String incidentsNames) {
+        Iterator<Map.Entry<String, Session>> iterator = sessions.entrySet().iterator();
+        while (iterator.hasNext()) {
+            if (incidentsNames.equals(iterator.next().getValue().getAssociatedIncidentName())) {
+                iterator.remove();
+            }
+        }
     }
 
     @RequestMapping(value = "/Session", method = RequestMethod.GET)

@@ -31,7 +31,7 @@
             		return false;
             	}
             	if (associatedIncidentName == "NONE") {
-            		alert("Kindly select associated Incident Name. (Create Incident first, if there is none.)");
+            		alert("Kindly select Associated Incident. (Create Incident first, if there is none.)");
             		return false;
             	}
             	else {
@@ -98,6 +98,7 @@
                     </td>
                 </tr>
             </table>
+            ${successMessage}
         </form:form>
         </div>
         <table>

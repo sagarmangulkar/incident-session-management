@@ -19,7 +19,10 @@
         <table border="black">
             <tr>
                 <td>
-                    Name
+                    Session Name
+                </td>
+                <td>
+                    Associated Incident
                 </td>
                 <td>
                     Status
@@ -35,6 +38,12 @@
                         </form:label>
                         <form:input path="name" type="hidden" value="${session.getName()}"/>
                     </td>
+                    <td>
+                        <form:label path="associatedIncidentName">
+                            ${session.getAssociatedIncidentName()}
+                        </form:label>
+                        <form:input path="associatedIncidentName" type="hidden" value="${session.getAssociatedIncidentName()}"/>
+                    </td>
                     <td align="center">
                         <form:select path="status" class="custom-select" value="${session.getStatus()}">
                             <form:option value="In_Progress" label="In Progress"/>
@@ -47,6 +56,9 @@
                 </tr>
                 <tr>
                     <td align="center" colspan="4">
+                        <button onclick="location.href = 'ViewSessions';" id="button_view_Session">
+                                Cancel
+                        </button>
                         <input type="submit" value="Update">
                     </td>
                 </tr>

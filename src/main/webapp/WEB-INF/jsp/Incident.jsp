@@ -8,27 +8,31 @@
     <title>Create Incident</title>
 </head>
 <body class="class-for-index">
-    <br>
+    <h2>Incidents</h2>
     <script>
         window.onload = function(){
-            document.getElementById("id").value = "";
             document.getElementById("name").value = "";
             document.getElementById("description").value = "";
         }
+        function validate() {
+            var name = document.incidentForm.name.value;
+            var description = document.incidentForm.description.value;
+            if (name == "") {
+                alert("Kindly provide Name");
+                return false;
+            }
+            if (description == "") {
+                alert("Kindly provide Description");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
     </script>
     <div>
-    <form:form method="POST" action="/CreateIncident" modelAttribute="Incident">
+    <form:form method="POST" action="/CreateIncident" modelAttribute="Incident" onsubmit="return validate()" name="incidentForm">
         <table>
-            <tr>
-                <td align="center">
-                    <form:label path="id">
-                        Id
-                    </form:label>
-                </td>
-                <td align="center">
-                    <form:input path="id" />
-                </td>
-            </tr>
             <tr>
                 <td align="center">
                     <form:label path="name">
@@ -36,12 +40,12 @@
                     </form:label>
                 </td>
                 <td align="center">
-                    <form:input path="name" />
+                    <form:input path="name" name="name"/>
                 </td>
             </tr>
             <tr>
                 <td align="center">
-                    <form:label path="description">
+                    <form:label path="description"  name="description">
                         Description
                     </form:label>
                 </td>
@@ -62,12 +66,12 @@
         <tr>
             <td>
                 <button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">
-                    Incidents
+                    View Incidents
                 </button>
             </td>
             <td>
                 <button onclick="location.href = 'ViewSessions';" id="button_view_sessions">
-                    Sessions
+                    View Sessions
                 </button>
             </td>
         </tr>

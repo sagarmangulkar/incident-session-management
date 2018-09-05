@@ -12,17 +12,19 @@
     <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
 </head>
 <body class="class-for-index">
-    <h2>    Sessions</h2>
+    <h2>Sessions</h2>
+    <button onclick="location.href = 'Session';" id="button_create_session">
+        Create Session
+    </button>
+    <button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">
+        View Incidents
+    </button>
     <br>
-    <button onclick="location.href = 'Session';" id="button_create_session">Create Session</button>
     <br>
-    <br>
+    Kindly click on created session name to update it.
     <div>
         <table border="black">
             <tr>
-                <td>
-                    ID
-                </td>
                 <td>
                     Name
                 </td>
@@ -32,22 +34,25 @@
                 <td>
                     Malware Scan Status
                 </td>
+                <td>
+                    Associated Incident
+                </td>
             </tr>
             <c:forEach items="${sessions}" var="session">
                 <tr>
                     <td>
-                        <a href="SessionToUpdated?id=${session.getKey()}">
-                            <c:out value="${session.getKey()}"/>
+                        <a href="SessionToUpdated?sessionName=${session.getValue().getName()}">
+                            <c:out value="${session.getValue().getName()}"/>
                         </a>
-                    </td>
-                    <td>
-                        <c:out value="${session.getValue().getName()}"/>
                     </td>
                     <td>
                         <c:out value="${session.getValue().getStatus()}"/>
                     </td>
                     <td>
                         <c:out value="${session.getValue().getMalwareScanStatus()}"/>
+                    </td>
+                    <td>
+                        <c:out value="${session.getValue().getAssociatedIncidentName()}"/>
                     </td>
                 </tr>
             </c:forEach>

@@ -3,7 +3,6 @@ package com.basis.WebApp.beans;
 import java.util.Date;
 
 public class Incident {
-    private int id;
     private String name;
     private String description;
     private Date creationTime;
@@ -11,19 +10,10 @@ public class Incident {
     public Incident() {
     }
 
-    public Incident(int id, String name, String description, Date creationTime) {
-        this.id = id;
+    public Incident(String name, String description, Date creationTime) {
         this.name = name;
         this.description = description;
-        this.creationTime = new Date();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.creationTime = creationTime;
     }
 
     public String getName() {
@@ -51,23 +41,12 @@ public class Incident {
     }
 
     @Override
-    public String toString() {
-        return "Incident{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", creationTime=" + creationTime +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Incident incident = (Incident) o;
 
-        if (id != incident.id) return false;
         if (name != null ? !name.equals(incident.name) : incident.name != null) return false;
         if (description != null ? !description.equals(incident.description) : incident.description != null)
             return false;
@@ -76,10 +55,18 @@ public class Incident {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (creationTime != null ? creationTime.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Incident{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", creationTime=" + creationTime +
+                '}';
     }
 }

@@ -4,29 +4,21 @@ import java.util.Date;
 
 enum Status {In_Progress, Completed}
 public class Session {
-    private int id;
     private String name;
     private Status status;
     private String malwareScanStatus;
+    private String associatedIncidentName;
     private Date createTime;
 
     public Session() {
     }
 
-    public Session(int id, String name, Status status, String malwareScanStatus, Date createTime) {
-        this.id = id;
+    public Session(String name, Status status, String malwareScanStatus, String associatedIncidentName, Date createTime) {
         this.name = name;
         this.status = status;
         this.malwareScanStatus = malwareScanStatus;
-        this.createTime = new Date();
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.associatedIncidentName = associatedIncidentName;
+        this.createTime = createTime;
     }
 
     public String getName() {
@@ -53,6 +45,14 @@ public class Session {
         this.malwareScanStatus = malwareScanStatus;
     }
 
+    public String getAssociatedIncidentName() {
+        return associatedIncidentName;
+    }
+
+    public void setAssociatedIncidentName(String associatedIncidentName) {
+        this.associatedIncidentName = associatedIncidentName;
+    }
+
     public Date getCreateTime() {
         return createTime;
     }
@@ -68,20 +68,21 @@ public class Session {
 
         Session session = (Session) o;
 
-        if (id != session.id) return false;
         if (name != null ? !name.equals(session.name) : session.name != null) return false;
         if (status != session.status) return false;
         if (malwareScanStatus != null ? !malwareScanStatus.equals(session.malwareScanStatus) : session.malwareScanStatus != null)
+            return false;
+        if (associatedIncidentName != null ? !associatedIncidentName.equals(session.associatedIncidentName) : session.associatedIncidentName != null)
             return false;
         return createTime != null ? createTime.equals(session.createTime) : session.createTime == null;
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        int result = name != null ? name.hashCode() : 0;
         result = 31 * result + (status != null ? status.hashCode() : 0);
         result = 31 * result + (malwareScanStatus != null ? malwareScanStatus.hashCode() : 0);
+        result = 31 * result + (associatedIncidentName != null ? associatedIncidentName.hashCode() : 0);
         result = 31 * result + (createTime != null ? createTime.hashCode() : 0);
         return result;
     }
@@ -89,10 +90,10 @@ public class Session {
     @Override
     public String toString() {
         return "Session{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", status=" + status +
                 ", malwareScanStatus='" + malwareScanStatus + '\'' +
+                ", associatedIncidentName='" + associatedIncidentName + '\'' +
                 ", createTime=" + createTime +
                 '}';
     }

@@ -12,16 +12,12 @@
     <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
 </head>
 <body class="class-for-index">
-    You can update Session here.
     <h2>    Sessions</h2>
-    <br>
+    You can update Session here.
     <div>
         <form:form method="POST" action="/UpdateSession" modelAttribute="Session">
         <table border="black">
             <tr>
-                <td>
-                    ID
-                </td>
                 <td>
                     Name
                 </td>
@@ -33,12 +29,6 @@
                 </td>
             </tr>
                 <tr>
-                    <td>
-                        <form:label path="id">
-                            ${session.getId()}
-                        </form:label>
-                        <form:input path="id" type="hidden" value="${session.getId()}"/>
-                    </td>
                     <td>
                         <form:label path="name">
                             ${session.getName()}

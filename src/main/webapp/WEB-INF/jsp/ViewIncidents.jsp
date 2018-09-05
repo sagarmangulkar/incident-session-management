@@ -12,21 +12,22 @@
     <script type='text/javascript' src='http://code.jquery.com/jquery.min.js'></script>
 </head>
 <body class="class-for-index">
+    <h2>Incidents</h2>
+    <button onclick="location.href = 'Incident';" id="button_create_incident">
+        Create Incident
+    </button>
+    <button onclick="location.href = 'ViewSessions';" id="button_view_Session">
+            View Sessions
+    </button>
 
-    <br>
-    <button onclick="location.href = 'Incident';" id="button_create_incident">Create</button>
-    <br>
-    <br>
     <form:form method="POST" action="/DeleteIncident" modelAttribute="IncidentsToBeDeleted" id="incidentForm">
-        <input type="submit" value="Delete" id="submit">
+        <input type="submit" value="Delete Incident" id="submit">
         <br>
-        <h3>Incidents</h3><br>
+        Kindly select (single/multiple) checkboxes to delete Incidents.
+        <div>
         <table border="black">
             <tr>
                 <td>
-                </td>
-                <td>
-                    ID
                 </td>
                 <td>
                     Name
@@ -38,10 +39,7 @@
             <c:forEach items="${incidents}" var="incident">
                 <tr>
                     <td>
-                        <form:checkbox path="idsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/>
-                    </td>
-                    <td>
-                        <c:out value="${incident.getKey()}"/>
+                        <form:checkbox path="incidentsToBeDeleted" value="${incident.getKey()}" onClick="enableDeleteButton(this)" id="myCheck"/>
                     </td>
                     <td>
                         <c:out value="${incident.getValue().getName()}"/>
@@ -52,6 +50,7 @@
                 </tr>
             </c:forEach>
         </table>
+        </div>
     </form:form>
     <h2>${successMessage}</h2>
 

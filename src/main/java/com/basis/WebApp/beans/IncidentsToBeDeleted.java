@@ -3,21 +3,21 @@ package com.basis.WebApp.beans;
 import java.util.Arrays;
 
 public class IncidentsToBeDeleted {
-    private Integer[] idsToBeDeleted;
+    private String[] incidentsToBeDeleted;
 
     public IncidentsToBeDeleted() {
     }
 
-    public IncidentsToBeDeleted(Integer[] incidents) {
-        this.idsToBeDeleted = incidents;
+    public IncidentsToBeDeleted(String[] incidentsToBeDeleted) {
+        this.incidentsToBeDeleted = incidentsToBeDeleted;
     }
 
-    public Integer[] getIdsToBeDeleted() {
-        return idsToBeDeleted;
+    public String[] getIncidentsToBeDeleted() {
+        return incidentsToBeDeleted;
     }
 
-    public void setIdsToBeDeleted(Integer[] idsToBeDeleted) {
-        this.idsToBeDeleted = idsToBeDeleted;
+    public void setIncidentsToBeDeleted(String[] incidentsToBeDeleted) {
+        this.incidentsToBeDeleted = incidentsToBeDeleted;
     }
 
     @Override
@@ -27,11 +27,19 @@ public class IncidentsToBeDeleted {
 
         IncidentsToBeDeleted that = (IncidentsToBeDeleted) o;
 
-        return Arrays.equals(idsToBeDeleted, that.idsToBeDeleted);
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        return Arrays.equals(incidentsToBeDeleted, that.incidentsToBeDeleted);
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(idsToBeDeleted);
+        return Arrays.hashCode(incidentsToBeDeleted);
+    }
+
+    @Override
+    public String toString() {
+        return "IncidentsToBeDeleted{" +
+                "incidentsToBeDeleted=" + Arrays.toString(incidentsToBeDeleted) +
+                '}';
     }
 }

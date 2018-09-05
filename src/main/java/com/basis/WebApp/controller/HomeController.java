@@ -18,8 +18,8 @@ import java.util.LinkedHashMap;
 @Controller
 public class HomeController {
 
-    private LinkedHashMap<Integer, Incident> incidents = new LinkedHashMap<>();
-    private LinkedHashMap<Integer, Session> sessions = new LinkedHashMap<>();
+    private LinkedHashMap<String, Incident> incidents = new LinkedHashMap<>();
+    private LinkedHashMap<String, Session> sessions = new LinkedHashMap<>();
 
     @ModelAttribute
     @RequestMapping("/index")
@@ -39,7 +39,6 @@ public class HomeController {
 
     @RequestMapping("/ViewSessions")
     public String session(Model model) {
-        //model.addAttribute("name", "Sagar");
         model.addAttribute("sessions", sessions);
         return "ViewSessions";
     }
@@ -58,7 +57,7 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
-        incidents.put(incident.getId(), incident);
+        incidents.put(incident.getName(), incident);
         model.addAttribute("successMessage", incident.getName() + " has been created.");
         return "Incident";
     }
@@ -70,15 +69,16 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
-        for (int id : incidentsToBeDeleted.getIdsToBeDeleted()) {
-            incidents.remove(id);
+        for (String incidentsNames : incidentsToBeDeleted.getIncidentsToBeDeleted()) {
+            incidents.remove(incidentsNames);
         }
-        model.addAttribute("successMessage", incidentsToBeDeleted.getIdsToBeDeleted().length + " number of Incidents have been Deleted.");
+        model.addAttribute("successMessage", incidentsToBeDeleted.getIncidentsToBeDeleted().length + " number of Incidents have been Deleted.");
         return "redirect:/ViewIncidents";
     }
 
     @RequestMapping(value = "/Session", method = RequestMethod.GET)
-    public ModelAndView session(){
+    public ModelAndView sessionToBeCreated(Model model){
+        model.addAttribute("incidents", incidents);
         return new ModelAndView("Session",
                 "Session",
                 new Session());
@@ -91,20 +91,21 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
-        sessions.put(session.getId(), session);
+        sessions.put(session.getName(), session);
         model.addAttribute("successMessage",
                 session.getName() + " has been created. ");
+        model.addAttribute("incidents", incidents);
         return "Session";
     }
 
     @RequestMapping("/SessionToUpdated")
     public String SessionToUpdated(@Valid @ModelAttribute("Session") Session session,
                                    BindingResult result,
-                                   ModelMap model, int id){
+                                   ModelMap model, String sessionName){
         if (result.hasErrors()) {
             return "error";
         }
-        model.addAttribute("session", sessions.get(id));
+        model.addAttribute("session", sessions.get(sessionName));
         return "UpdateSession";
     }
 
@@ -115,10 +116,9 @@ public class HomeController {
         if (result.hasErrors()) {
             return "error";
         }
-        sessions.put(session.getId(), session);
+        sessions.put(session.getName(), session);
         model.addAttribute("successMessage",
                 session.getName() + " has been updated. ");
-        //return "UpdateSession";
         return "redirect:/ViewSessions";
     }
 }

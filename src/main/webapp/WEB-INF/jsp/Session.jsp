@@ -1,4 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page isELIgnored="false" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,28 +11,37 @@
     <title>Create Session</title>
 </head>
 <body class="class-for-index">
-    <h2>    Sessions</h2>
+    <h2>Sessions</h2>
         <br>
         <script>
-            window.onload = function(){
-                document.getElementById("id").value = "";
+            window.onload = function() {
                 document.getElementById("name").value = "";
                 document.getElementById("malwareScanStatus").value = "";
             }
+            function validate() {
+            	var name = document.sessionForm.name.value;
+            	var malwareScanStatus = document.sessionForm.malwareScanStatus.value;
+            	var associatedIncidentName = document.sessionForm.associatedIncidentName.value;
+            	if (name == "") {
+            		alert("Kindly provide Name");
+            		return false;
+            	}
+            	if (malwareScanStatus == "") {
+            		alert("Kindly provide Malware Scan Status");
+            		return false;
+            	}
+            	if (associatedIncidentName == "NONE") {
+            		alert("Kindly select associated Incident Name. (Create Incident first, if there is none.)");
+            		return false;
+            	}
+            	else {
+            		return true;
+            	}
+            }
         </script>
         <div>
-        <form:form method="POST" action="/CreateSession" modelAttribute="Session">
+        <form:form method="POST" action="/CreateSession" modelAttribute="Session" onsubmit="return validate()" name="sessionForm">
             <table>
-                <tr>
-                    <td align="center">
-                        <form:label path="id">
-                            Id
-                        </form:label>
-                    </td>
-                    <td align="center">
-                        <form:input path="id" />
-                    </td>
-                </tr>
                 <tr>
                     <td align="center">
                         <form:label path="name">
@@ -37,7 +49,7 @@
                         </form:label>
                     </td>
                     <td align="center">
-                        <form:input path="name" />
+                        <form:input path="name" name="name"/>
                     </td>
                 </tr>
                 <tr>
@@ -60,28 +72,44 @@
                         </form:label>
                     </td>
                     <td align="center">
-                        <form:input path="malwareScanStatus" />
+                        <form:input path="malwareScanStatus" name="malwareScanStatus"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <form:label path="associatedIncidentName">
+                            Associated Incident
+                        </form:label>
+                    </td>
+                    <td align="center">
+                        <form:select path="associatedIncidentName" class="custom-select" name="associatedIncidentName">
+                            <form:option value="NONE" label="--- Select one ---" />
+                            <c:forEach items="${incidents}" var="incident">
+                                <form:option value="${incident.getValue().getName()}">
+                                    <c:out value="${incident.getValue().getName()}"/>
+                                </form:option>
+                            </c:forEach>
+                        </form:select>
                     </td>
                 </tr>
                 <tr>
                     <td align="center" colspan="2">
-                        <input type="submit" value="Submit">
+                        <input type="submit" value="Submit" />
                     </td>
                 </tr>
             </table>
-            ${successMessage}
         </form:form>
         </div>
         <table>
             <tr>
                 <td>
                     <button onclick="location.href = 'ViewIncidents';" id="button_view_incidents">
-                        Incidents
+                        View Incidents
                     </button>
                 </td>
                 <td>
                     <button onclick="location.href = 'ViewSessions';" id="button_view_sessions">
-                        Sessions
+                        View Sessions
                     </button>
                 </td>
             </tr>
